@@ -1,0 +1,229 @@
+SDiZO Projekt 1.
+b - test automatyczny kontenerów
+m - test manualny
+b
+
+Dummy benchmark suite: 21ns
+
+Testing dataset at size: 500
+//////////////
+Array push_back:  51ns
+Array push_front: 51ns
+List push_back:   27ns
+List push_front:  27ns
+BinHeap add:      69ns
+Rbtree add:       55ns
+Avltree add:      72ns
+
+Array insert:     69ns
+List insert ref:  26ns
+
+Array contains:   142ns
+List contains:    258ns
+BinHeap contains: 138ns
+Rbtree contains:  31ns
+Avltree contains: 32ns
+
+Array remove:     125ns
+Array pop_back:   62ns
+Array pop_front:  56ns
+List pop_back:    26ns
+List pop_front:   26ns
+List remove val:  249ns
+List remove ref:  23ns
+BinHeap remove:   168ns
+Rbtree remove:    42ns
+Avltree remove:   66ns
+\\\\\\\\\\\\\
+
+Testing dataset at size: 1000
+//////////////
+Array push_back:  67ns
+Array push_front: 68ns
+List push_back:   27ns
+List push_front:  27ns
+BinHeap add:      89ns
+Rbtree add:       62ns
+Avltree add:      82ns
+
+Array insert:     87ns
+List insert ref:  26ns
+
+Array contains:   262ns
+List contains:    527ns
+BinHeap contains: 256ns
+Rbtree contains:  36ns
+Avltree contains: 36ns
+
+Array remove:     185ns
+Array pop_back:   69ns
+Array pop_front:  69ns
+List pop_back:    25ns
+List pop_front:   24ns
+List remove val:  637ns
+List remove ref:  23ns
+BinHeap remove:   262ns
+Rbtree remove:    43ns
+Avltree remove:   73ns
+\\\\\\\\\\\\\
+
+Testing dataset at size: 2000
+//////////////
+Array push_back:  84ns
+Array push_front: 86ns
+List push_back:   27ns
+List push_front:  27ns
+BinHeap add:      105ns
+Rbtree add:       70ns
+Avltree add:      93ns
+
+Array insert:     107ns
+List insert ref:  28ns
+
+Array contains:   484ns
+List contains:    1657ns
+BinHeap contains: 481ns
+Rbtree contains:  41ns
+Avltree contains: 41ns
+
+Array remove:     305ns
+Array pop_back:   87ns
+Array pop_front:  87ns
+List pop_back:    24ns
+List pop_front:   24ns
+List remove val:  1638ns
+List remove ref:  24ns
+BinHeap remove:   472ns
+Rbtree remove:    45ns
+Avltree remove:   82ns
+\\\\\\\\\\\\\
+
+Testing dataset at size: 5000
+//////////////
+Array push_back:  148ns
+Array push_front: 153ns
+List push_back:   26ns
+List push_front:  27ns
+BinHeap add:      169ns
+Rbtree add:       83ns
+Avltree add:      107ns
+
+Array insert:     161ns
+List insert ref:  29ns
+
+Array contains:   1177ns
+List contains:    3999ns
+BinHeap contains: 1176ns
+Rbtree contains:  51ns
+Avltree contains: 51ns
+
+Array remove:     697ns
+Array pop_back:   147ns
+Array pop_front:  149ns
+List pop_back:    24ns
+List pop_front:   24ns
+List remove val:  4029ns
+List remove ref:  24ns
+BinHeap remove:   1117ns
+Rbtree remove:    56ns
+Avltree remove:   99ns
+\\\\\\\\\\\\\
+
+Testing dataset at size: 10000
+//////////////
+Array push_back:  321ns
+Array push_front: 323ns
+List push_back:   28ns
+List push_front:  28ns
+BinHeap add:      338ns
+Rbtree add:       94ns
+Avltree add:      124ns
+
+Array insert:     336ns
+List insert ref:  33ns
+
+Array contains:   2332ns
+List contains:    9603ns
+BinHeap contains: 2309ns
+Rbtree contains:  68ns
+Avltree contains: 69ns
+
+Array remove:     1430ns
+Array pop_back:   284ns
+Array pop_front:  301ns
+List pop_back:    25ns
+List pop_front:   24ns
+List remove val:  9631ns
+List remove ref:  26ns
+BinHeap remove:   2243ns
+Rbtree remove:    66ns
+Avltree remove:   119ns
+\\\\\\\\\\\\\
+
+Testing dataset at size: 25000
+//////////////
+Array push_back:  762ns
+Array push_front: 802ns
+List push_back:   27ns
+List push_front:  26ns
+BinHeap add:      787ns
+Rbtree add:       116ns
+Avltree add:      153ns
+
+Array insert:     805ns
+List insert ref:  44ns
+
+Array contains:   5768ns
+List contains:    16892ns
+BinHeap contains: 5788ns
+Rbtree contains:  90ns
+Avltree contains: 92ns
+
+Array remove:     3425ns
+Array pop_back:   770ns
+Array pop_front:  777ns
+List pop_back:    25ns
+List pop_front:   25ns
+List remove val:  19602ns
+List remove ref:  30ns
+BinHeap remove:   5467ns
+Rbtree remove:    86ns
+Avltree remove:   153ns
+\\\\\\\\\\\\\
+
+Testing dataset at size: 50000
+//////////////
+Rbtree add:       132ns
+Avltree add:      173ns
+
+Rbtree contains:  104ns
+Avltree contains: 106ns
+
+Rbtree remove:    102ns
+Avltree remove:   183ns
+\\\\\\\\\\\\\
+
+Testing dataset at size: 100000
+//////////////
+Rbtree add:       151ns
+Avltree add:      196ns
+
+Rbtree contains:  144ns
+Avltree contains: 147ns
+
+Rbtree remove:    127ns
+Avltree remove:   226ns
+\\\\\\\\\\\\\
+
+Testing dataset at size: 250000
+//////////////
+Rbtree add:       206ns
+Avltree add:      261ns
+
+Rbtree contains:  282ns
+Avltree contains: 287ns
+
+Rbtree remove:    235ns
+Avltree remove:   419ns
+\\\\\\\\\\\\\
+
