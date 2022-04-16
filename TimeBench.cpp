@@ -19,7 +19,7 @@ class TimeBenchmark {
     const size_t datasetGenerationCount = 100;
 
     const std::vector<std::size_t> datasetSizesToTest =
-    { 500, 1'000, 2'000, 5'000, 10'000, 25'000 };
+    { 500, 1'000, 2'000, 5'000, 10'000, 25'000, 50'000, 100'000, 250'000 };
 
     size_t datasetSize = 500;
 
@@ -157,27 +157,6 @@ class TimeBenchmark {
 
                     containerTimeAveraging.benchmarkStart();
                     container.insert(dataset[datasetAt], insertAt);
-                    containerTimeAveraging.benchmarkStop();
-                }
-            }
-        }
-        return containerTimeAveraging.getAvgElapsedNsec();
-    }
-
-    template <typename D>
-    timedata benchmarkSuiteDummy()
-    {
-        AveragedTimeMeasure containerTimeAveraging;
-
-        for (std::size_t j = 0; j < datasetGenerationCount; j++) {
-            auto dataset = generateRandomData<D>(datasetSize);
-
-            for (std::size_t i = 0; i < averagingLoopsCount; i++) {
-                // Array has smallest stack space usage
-                Array<D> container;
-                for (const auto &val : dataset) {
-                    containerTimeAveraging.benchmarkStart();
-                    // dummy
                     containerTimeAveraging.benchmarkStop();
                 }
             }
@@ -326,75 +305,92 @@ public:
         auto list_pop_front_lambda =
             [](List<datatype> &list) { list.pop_front(); };
 
-        cout << "\nDummy benchmark suite: " << benchmarkSuiteDummy<datatype>() << "ns\n\n";
-
         for (auto &datasetSizeToTest : datasetSizesToTest) {
             datasetSize = datasetSizeToTest;
             std::cout << "Testing dataset at size: " << datasetSizeToTest << "\n//////////////\n";
 
-            // Add
-            cout << "Array push_back:  " << benchmarkSuiteAdd<Array, datatype>(array_push_back_lambda) << "ns\n";
-            cout << "Array push_front: " << benchmarkSuiteAdd<Array, datatype>(array_push_front_lambda) << "ns\n";
+            if (datasetSize <= 25'000) {
+                // Add
+                cout << "Array push_back:  " << benchmarkSuiteAdd<Array, datatype>(array_push_back_lambda) << "ns\n";
+                cout << "Array push_front: " << benchmarkSuiteAdd<Array, datatype>(array_push_front_lambda) << "ns\n";
 
-            cout << "List push_back:   " << benchmarkSuiteAdd<List, datatype>(list_push_back_lambda) << "ns\n";
-            cout << "List push_front:  " << benchmarkSuiteAdd<List, datatype>(list_push_front_lambda) << "ns\n";
+                cout << "List push_back:   " << benchmarkSuiteAdd<List, datatype>(list_push_back_lambda) << "ns\n";
+                cout << "List push_front:  " << benchmarkSuiteAdd<List, datatype>(list_push_front_lambda) << "ns\n";
 
-            cout << "BinHeap add:      " << benchmarkSuiteAdd<BinHeap, datatype>(binheap_add_lambda) << "ns\n";
+                cout << "BinHeap add:      " << benchmarkSuiteAdd<BinHeap, datatype>(binheap_add_lambda) << "ns\n";
 
-            cout << "Rbtree add:       " << benchmarkSuiteAdd<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
+                cout << "Rbtree add:       " << benchmarkSuiteAdd<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
 
-            cout << "Avltree add:      " << benchmarkSuiteAdd<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
+                cout << "Avltree add:      " << benchmarkSuiteAdd<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
 
-            cout << endl;
+                cout << endl;
 
-            // Insert
-            cout << "Array insert:     " << benchmarkSuiteArrayInsert<datatype>() << "ns\n";
+                // Insert
+                cout << "Array insert:     " << benchmarkSuiteArrayInsert<datatype>() << "ns\n";
 
-            cout << "List insert ref:  " << benchmarkSuiteListInsert<datatype>() << "ns\n";
+                cout << "List insert ref:  " << benchmarkSuiteListInsert<datatype>() << "ns\n";
 
-            cout << endl;
+                cout << endl;
 
-            // Contains
-            cout << "Array contains:   " << benchmarkSuiteSearch<Array, datatype>(array_push_back_lambda) << "ns\n";
+                // Contains
+                cout << "Array contains:   " << benchmarkSuiteSearch<Array, datatype>(array_push_back_lambda) << "ns\n";
 
-            cout << "List contains:    " << benchmarkSuiteSearch<List, datatype>(list_push_back_lambda) << "ns\n";
+                cout << "List contains:    " << benchmarkSuiteSearch<List, datatype>(list_push_back_lambda) << "ns\n";
 
-            cout << "BinHeap contains: " << benchmarkSuiteSearch<BinHeap, datatype>(binheap_add_lambda) << "ns\n";
+                cout << "BinHeap contains: " << benchmarkSuiteSearch<BinHeap, datatype>(binheap_add_lambda) << "ns\n";
 
-            cout << "Rbtree contains:  " << benchmarkSuiteSearch<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
+                cout << "Rbtree contains:  " << benchmarkSuiteSearch<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
 
-            cout << "Avltree contains: " << benchmarkSuiteSearch<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
+                cout << "Avltree contains: " << benchmarkSuiteSearch<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
 
-            cout << endl;
+                cout << endl;
 
-            // Remove
-            cout << "Array remove:     " << benchmarkSuiteRemove<Array, datatype>(array_push_back_lambda) << "ns\n";
+                // Remove
+                cout << "Array remove:     " << benchmarkSuiteRemove<Array, datatype>(array_push_back_lambda) << "ns\n";
 
-            cout << "Array pop_back:   " <<
-                benchmarkSuiteRemoveFunc<Array, datatype>(array_push_back_lambda, array_pop_back_lambda)
-                << "ns\n";
+                cout << "Array pop_back:   " <<
+                    benchmarkSuiteRemoveFunc<Array, datatype>(array_push_back_lambda, array_pop_back_lambda)
+                    << "ns\n";
 
-            cout << "Array pop_front:  " <<
-                benchmarkSuiteRemoveFunc<Array, datatype>(array_push_back_lambda, array_pop_front_lambda)
-                << "ns\n";
+                cout << "Array pop_front:  " <<
+                    benchmarkSuiteRemoveFunc<Array, datatype>(array_push_back_lambda, array_pop_front_lambda)
+                    << "ns\n";
 
-            cout << "List pop_back:    " <<
-                benchmarkSuiteRemoveFunc<List, datatype>(list_push_back_lambda, list_pop_back_lambda)
-                << "ns\n";
+                cout << "List pop_back:    " <<
+                    benchmarkSuiteRemoveFunc<List, datatype>(list_push_back_lambda, list_pop_back_lambda)
+                    << "ns\n";
 
-            cout << "List pop_front:   " <<
-                benchmarkSuiteRemoveFunc<List, datatype>(list_push_back_lambda, list_pop_front_lambda)
-                << "ns\n";
+                cout << "List pop_front:   " <<
+                    benchmarkSuiteRemoveFunc<List, datatype>(list_push_back_lambda, list_pop_front_lambda)
+                    << "ns\n";
 
-            cout << "List remove val:  " << benchmarkSuiteRemove<List, datatype>(list_push_back_lambda) << "ns\n";
+                cout << "List remove val:  " << benchmarkSuiteRemove<List, datatype>(list_push_back_lambda) << "ns\n";
 
-            cout << "List remove ref:  " << benchmarkSuiteRemoveList<datatype>(list_push_back_lambda) << "ns\n";
+                cout << "List remove ref:  " << benchmarkSuiteRemoveList<datatype>(list_push_back_lambda) << "ns\n";
 
-            cout << "BinHeap remove:   " << benchmarkSuiteRemove<BinHeap, datatype>(binheap_add_lambda) << "ns\n";
+                cout << "BinHeap remove:   " << benchmarkSuiteRemove<BinHeap, datatype>(binheap_add_lambda) << "ns\n";
 
-            cout << "Rbtree remove:    " << benchmarkSuiteRemove<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
+                cout << "Rbtree remove:    " << benchmarkSuiteRemove<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
 
-            cout << "Avltree remove:   " << benchmarkSuiteRemove<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
+                cout << "Avltree remove:   " << benchmarkSuiteRemove<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
+            }
+            else {
+                cout << "Rbtree add:       " << benchmarkSuiteAdd<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
+
+                cout << "Avltree add:      " << benchmarkSuiteAdd<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
+
+                cout << endl;
+
+                cout << "Rbtree contains:  " << benchmarkSuiteSearch<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
+
+                cout << "Avltree contains: " << benchmarkSuiteSearch<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
+
+                cout << endl;
+
+                cout << "Rbtree remove:    " << benchmarkSuiteRemove<RBTree, datatype>(rbtree_add_lambda) << "ns\n";
+
+                cout << "Avltree remove:   " << benchmarkSuiteRemove<AVLTree, datatype>(avltree_add_lambda) << "ns\n";
+            }
 
             cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\n" << endl;
         }
