@@ -65,14 +65,14 @@ class TimeBenchmark {
         std::vector<T> dataset;
 
         for (int i = 0; i < datasetSize; i++) {
-            dataset.push_back(randomNumberWithinRange(INT32_MIN, INT32_MAX));
+            dataset.push_back(randomNumberWithinRange(INT_MIN, INT_MAX));
         }
 
         // Remove any duplicates
         std::vector<datatype>::iterator last = std::unique(dataset.begin(), dataset.end());
         while (last != dataset.end()) {
             while (last != dataset.end()) {
-                (*last++) = randomNumberWithinRange(INT32_MIN, INT32_MAX);
+                (*last++) = randomNumberWithinRange(INT_MIN, INT_MAX);
             }
 
             last = std::unique(dataset.begin(), dataset.end());
