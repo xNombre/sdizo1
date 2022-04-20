@@ -112,12 +112,18 @@ void Array<T>::push_front(const T &val)
 template <typename T>
 void Array<T>::pop_back()
 {
+    if (array_size == 0)
+        return;
+    
     resize(array_size - 1);
 }
 
 template <typename T>
 void Array<T>::pop_front()
 {
+    if (array_size == 0)
+        return;
+    
     size_t new_size = array_size - 1;
     T *new_array = new T[new_size];
 
