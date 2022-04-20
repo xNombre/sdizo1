@@ -145,6 +145,10 @@ void listMenu()
     List<datatype> container;
 repeat:
     cout << commonOperations;
+    cout << "i - insert\n";
+    cout << "f - push front\n";
+    cout << "y - pop_front\n";
+    cout << "u - pop_back\n";
     input = getOptionFromUser();
 
     switch (input) {
@@ -167,6 +171,22 @@ repeat:
     case 'c':
         cout << container.contains(getDataFromUser()) << endl;
         break;
+    case 'i': {
+        auto look = getDataFromUser();
+        auto val = getDataFromUser();
+        auto pos = container.get_node(look);
+        container.insert(val, pos);
+        break;
+    }
+    case 'f':
+        container.push_front(getDataFromUser());
+        break;
+    case 'y':
+        container.pop_front();
+        break;
+    case 'u':
+        container.pop_back();
+        break;
     case 'p':
         container.print();
         std::cin.get();
@@ -182,6 +202,10 @@ void arrayMenu()
     Array<datatype> container;
 repeat:
     cout << commonOperations;
+    cout << "i - insert\n";
+    cout << "f - push front\n";
+    cout << "y - pop_front\n";
+    cout << "u - pop_back\n";
     input = getOptionFromUser();
 
     switch (input) {
@@ -204,6 +228,21 @@ repeat:
     }
     case 'c':
         cout << container.contains(getDataFromUser()) << endl;
+        break;
+    case 'i': {
+        auto at = getDataFromUser();
+        auto val = getDataFromUser();
+        container.insert(val, at);
+        break;
+    }
+    case 'f':
+        container.push_front(getDataFromUser());
+        break;
+    case 'y':
+        container.pop_front();
+        break;
+    case 'u':
+        container.pop_back();
         break;
     case 'p':
         container.print();
