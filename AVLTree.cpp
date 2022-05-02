@@ -215,20 +215,14 @@ bool AVLTree<T>::remove(const T &value)
     else
         getParentToChildPointer(nodeToBeRemoved) = nullptr;
 
-    if (!root) {
-        delete nodeToBeRemoved;
-        goto out;
-    }
-
     delete nodeToBeRemoved;
 
-    if (search == root) {
-        search->fixHeight();
+    if (!root) {
         goto out;
     }
 
     // Update height and rebalance if needed
-    while (search != root) {
+    while (search) {
         search->fixHeight();
 
 #ifndef NDEBUG

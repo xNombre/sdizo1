@@ -216,7 +216,7 @@ bool RBTree<T>::remove(const T &value)
     Node *dbFix;
     bool nodeIsRed = false;
 
-    if (nodeToBeRemoved == root) {
+    if (nodeToBeRemoved == root && !root->lchild && !root->rchild) {
         root = nullptr;
         goto out;
     }
